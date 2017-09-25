@@ -1,0 +1,40 @@
+#!/bin/bash
+if [ -z "$2" ]
+  then echo "./train [folder] [save_name]"; exit 0
+fi
+
+game="a_count"
+test_nc="a_count_nc"
+test_val="a_count_val"
+test_game="${test_val},${test_nc}"
+lr=0.00025
+lr_ft=0.0001
+model="FlatLSTM"
+result=$1
+save_name=$2
+
+#OMP_NUM_THREADS=1 th main.lua --game subtask_train --test_game subtask_val,subtask_nc,subtask_unseen --model PretrainB  --lr 0.0001 --save_folder $result --save $save_name --n_filters 64,128 --nbatches 100 --batch_size 8 --epochs 500 --nworker 16 --test_iter 40 --ch 3 --max_task 1 --rho 0.1 --lambda 0.96 --buf 2 ${@:3}
+
+sub_agent="flat/a_subtask_train_flat.t7"
+args1="--game $game --test_game $test_game --model $model --lr $lr --save_folder $result --soft_mem --rho 0.015 --epochs 300 --rho_epoch 200 --save ${save_name}_soft --param $sub_agent ${@:3}"
+args2="--game $test_nc --test_game $test_game --model $model --lr $lr_ft --save_folder $result --soft_mem --epochs 50 --rho 0.005 --rho_epoch 20 --param $result/${game}_${save_name}_soft.latest.t7 --save ${save_name}_soft ${@:3}"
+args3="--game $test_nc --test_game $test_game --model $model --lr $lr_ft --save_folder $result --epochs 50 --rho 0 --param $result/${test_nc}_${save_name}_soft.latest.t7 --save ${save_name}_hard ${@:3}"
+common="--iter_size 32 --batch_size 1 --test_iter 10 --nbatches 100 --lambda 0.96 --buf 1 --ch 32 --n_filters 16,32,32 --stride 4,1,2 --filter_size 8,1,5 --pad 0,0,0 --pool 0,0,0 --feat_size 6 --n_actions 9 --backend minecraft --counting"
+
+if ! [ -e "${result}/${game}_${save_name}_soft.tmp" ] &&  ! [ -e "${result}/${game}_${save_name}_soft.t7" ]
+then 
+echo $args1 
+OMP_NUM_THREADS=1 th main.lua $common $args1
+fi
+
+if ! [ -e "${result}/${test_nc}_${save_name}_soft.tmp" ] &&  ! [ -e "${result}/${test_nc}_${save_name}_soft.t7" ]
+then 
+echo $args2
+OMP_NUM_THREADS=1 th main.lua $common $args2
+fi
+
+if ! [ -e "${result}/${test_nc}_${save_name}_hard.tmp" ] &&  ! [ -e "${result}/${test_nc}_${save_name}_hard.t7" ]
+then 
+echo $args3
+OMP_NUM_THREADS=1 th main.lua $common $args3
+fi

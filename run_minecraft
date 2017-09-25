@@ -1,0 +1,29 @@
+#!/bin/bash
+
+port=$1
+cd Forge
+# rm -rf .gradle/2.0/taskArtifacts/*
+
+echo "# Configuration file
+network {
+    # Choose Port No. Random port is chosen by default (0).
+    I:port=$port
+}
+
+
+\"screen dimension\" {
+    # Screen Height
+    I:height=32
+
+    # Screen Width
+    I:width=32
+}
+
+
+task {
+    # Enable Roof?
+    B:roofEnable=true
+}
+" > eclipse/config/ml_mcrwap.cfg
+
+source gradlew runClient --project-cache-dir ~/cache 

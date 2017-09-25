@@ -1,0 +1,1 @@
+../../pg4/MazeBase/MultiGoals.lua

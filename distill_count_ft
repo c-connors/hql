@@ -1,0 +1,2 @@
+#!/bin/bash
+OMP_NUM_THREADS=1 th main.lua --game a_subtask_count --test_game a_subtask_count_unseen,a_subtask_count --model SubCount --multitask --lr 0.00025 --save_folder $1 --save $2 --n_filters 16,32,32 --stride 4,1,2 --filter_size 8,1,5 --pad 0,0,0 --pool 0,0,0 --feat_size 6 --nbatches 100 --batch_size 1 --epochs 300 --nworker 16 --test_iter 100 --ch 32 --rho 0 --lambda 0.96 --buf 1 --max_grad_norm 80 --term_action --backend "minecraft" --n_actions 9 --analogy_bs 100 --ldim 256 --max_args 3 --regularizer 10 --counting2 --pass_term --zeta 1 ${@:3} 

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<blocks>
+   <block id="0" type="stone" default = "true" brightness="1.0" />
+   <block id="1" type="wool" color="RED" brightness="1.0" />
+   <block id="2" type="wool" color="CYAN" brightness="1.0" />
+   <block id="3" type="wool" color="YELLOW" brightness="1.0" />
+   <block id="4" type="wool" color="LIME" brightness="1.0" />
+   <block id="5" type="wool" color="MAGENTA" brightness="1.0" />
+   <block id="6" type="wool" color="BROWN" brightness="1.0" />
+   <block id="7" type="wool" color="BLACK" brightness="1.0" />
+   <!--
+   <block id="0" type="stone" default = "true" brightness="1.0" />
+   <block id="1" type="wool" color="RED" brightness="1.0" />
+   <block id="2" type="wool" color="CYAN" brightness="1.0" />
+   <block id="3" type="wool" color="YELLOW" brightness="1.0" />
+   <block id="4" type="wool" color="LIME" brightness="1.0" />
+   <block id="5" type="wool" color="MAGENTA" brightness="1.0" />
+   <block id="6" type="wool" color="WHITE" brightness="1.0" /?>
+   <block id="7" type="wool" color="PINK" brightness="1.0" />
+   <block id="8" type="wool" color="BROWN" brightness="1.0" />
+   <block id="9" type="wool" color="ORANGE" brightness="1.0" />
+   <block id="10" type="wool" color="BLACK" brightness="1.0" />
+   !-->
+</blocks>

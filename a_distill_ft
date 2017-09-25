@@ -1,0 +1,2 @@
+#!/bin/bash
+OMP_NUM_THREADS=1 th main.lua --game a_subtask_train --test_game a_subtask_val,a_subtask_train,a_subtask_unseen --model "$1" --multitask --lr 0.0001 --save_folder $2 --save $3 --n_filters 16,32,32 --stride 4,1,2 --filter_size 8,1,5 --pad 0,0,0 --pool 0,0,0 --feat_size 6 --nbatches 100 --batch_size 1 --epochs 300 --nworker 16 --test_iter 200 --ch 32 --rho 0.1 --rho_epoch 100 --lambda 0.96 --buf 1 --max_grad_norm 80 --term_action --backend "minecraft" --n_actions 9 --analogy_bs 100 --param $2/a_subtask_train_${4}.t7 --regularizer 10 ${@:5}

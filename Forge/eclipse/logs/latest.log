@@ -1,0 +1,5 @@
+[01:09:57] [Client Shutdown Thread/INFO]: Stopping server
+[01:09:57] [Thread-13/INFO]: Deleting level 2017-04-17 09-37-01-115
+[01:09:57] [Thread-13/INFO]: Attempt 1...
+[01:09:57] [Thread-13/WARN]: Couldn't delete file ./saves/2017-04-17 09-37-01-115/region
+[01:09:57] [Thread-13/WARN]: Unsuccessful in deleting contents.

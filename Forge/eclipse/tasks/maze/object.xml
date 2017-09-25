@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<objects>
+   <object id="0" type="block" obj_type="stone" default="true" brightness="1.0" />
+   <object id="1" type="mob" obj_type="sheep" brightness="1.0" />
+   <object id="2" type="mob" obj_type="horse" brightness="1.0" />
+   <object id="3" type="mob" obj_type="pig" brightness="1.0" />
+   <object id="4" type="block" obj_type="chest" brightness="1.0" />
+   <object id="5" type="mob" obj_type="cat" brightness="1.0" />
+   <object id="6" type="mob" obj_type="zombie" brightness="1.0" />
+   <object id="7" type="block" obj_type="ice" brightness="1.0" />
+   <!--
+   <object id="10" type="block" obj_type="glass" brightness="1.0" />
+   <object id="5" type="mob" obj_type="creeper" brightness="1.0" />
+   <object id="2" type="mob" obj_type="cow" brightness="1.0" />
+   <object id="0" type="stone" default = "true" brightness="2.0" />
+   <object id="1" type="wool" color="RED" brightness="1.0" />
+   <object id="2" type="wool" color="CYAN" brightness="1.0" />
+   <object id="3" type="wool" color="YELLOW" brightness="1.0" />
+   <object id="4" type="wool" color="LIME" brightness="1.0" />
+   <object id="5" type="wool" color="MAGENTA" brightness="1.0" />
+   <object id="6" type="wool" color="WHITE" brightness="1.0" /?>
+   <object id="7" type="wool" color="PINK" brightness="1.0" />
+   <object id="8" type="wool" color="BROWN" brightness="1.0" />
+   <object id="9" type="wool" color="ORANGE" brightness="1.0" />
+   <object id="10" type="wool" color="BLACK" brightness="1.0" />
+   !-->
+</objects>

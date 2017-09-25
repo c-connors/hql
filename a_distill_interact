@@ -1,0 +1,31 @@
+#!/bin/bash
+teachers=\
+",single/a_visit1_LSTM_r0.1_0.0001.t7"\
+",single/a_visit2_LSTM_r0.1_0.0001.t7"\
+",single/a_visit3_LSTM_r0.1_0.0001.t7"\
+",single/a_visit4_LSTM_r0.1_0.0001.t7"\
+",single/a_visit5_LSTM_r0.1_0.0001.t7"\
+",single/a_visit6_LSTM_r0.1_0.0001.t7"\
+\
+",single/a_pickup5_LSTM_r0.1_0.0001.t7"\
+",single/a_pickup6_LSTM_r0.1_0.0001.t7"\
+",single/a_pickup1_LSTM_r0.1_0.0001.t7"\
+",single/a_pickup2_LSTM_r0.1_0.0001.t7"\
+",single/a_pickup3_LSTM_r0.1_0.0001.t7"\
+",single/a_pickup4_LSTM_r0.1_0.0001.t7"\
+\
+",single/a_transform1_LSTM_r0.1_0.0001.t7"\
+",single/a_transform2_LSTM_r0.1_0.0001.t7"\
+",single/a_transform5_LSTM_r0.1_0.0001.t7"\
+",single/a_transform6_LSTM_r0.1_0.0001.t7"\
+",single/a_transform3_LSTM_r0.1_0.0001.t7"\
+",single/a_transform4_LSTM_r0.1_0.0001.t7"\
+\
+",single/a_interact1_LSTM_r0.1_0.0001.t7"\
+",single/a_interact2_LSTM_r0.1_0.0001.t7"\
+",single/a_interact3_LSTM_r0.1_0.0001.t7"\
+",single/a_interact4_LSTM_r0.1_0.0001.t7"\
+", "\
+", "\
+
+OMP_NUM_THREADS=1 th main.lua --game a_subtask_interact --test_game a_subtask_interact_unseen,a_subtask_interact --model SubLSTM --multitask --lr 0.00025 --save_folder $1 --save $2 --n_filters 16,32,32 --stride 4,1,2 --filter_size 8,1,5 --pad 0,0,0 --pool 0,0,0 --feat_size 6 --nbatches 100 --teachers "$teachers" --batch_size 1 --epochs 300 --nworker 16 --test_iter 40 --ch 32 --rho 0 --lambda 0.96 --buf 1 --max_grad_norm 80 ${@:3} --term_action --backend "minecraft" --n_actions 9 --analogy_bs 40 --interact

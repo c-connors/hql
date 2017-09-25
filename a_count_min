@@ -1,0 +1,39 @@
+#!/bin/bash
+
+if [ -z "$3" ]
+  then echo "./train [result] [model] [save_name]"; exit 0
+fi
+game="a_count_minimal"
+test_nc="a_count_nc"
+test_val="a_count_val"
+test_game="${test_val},${test_nc}"
+sub_agent="subtask/a_subtask_dense_dense.t7"
+lr=0.00025
+lr_ft=0.0001
+model=$2
+result=$1
+save_name=${3}
+
+args1="--game $game --test_game $test_game --model $model --lr $lr --save_folder $result --soft_mem --epochs 300 --rho 0.015 --rho_epoch 200 --save ${save_name}_soft ${@:4}"
+args2="--game $test_nc --test_game $test_game --model $model --lr $lr_ft --save_folder $result --soft_mem --epochs 200 --rho 0.005 --rho_epoch 30 --param $result/${game}_${save_name}_soft.t7 --save ${save_name}_soft ${@:4}"
+args3="--game $test_nc --test_game $test_game --model $model --lr $lr_ft --save_folder $result --epochs 200 --rho 0 --param $result/${test_nc}_${save_name}_soft.t7 --save ${save_name}_hard ${@:4}"
+common="--ldim 256 --regularizer 10 --base --ta --l1 0.001 --soft_rho --iter_size 32 --initialize --batch_size 1 --test_iter 30 --nbatches 100 --lambda 0.96 --buf 1 --ch 32 --n_filters 16,32 --stride 4,1 --filter_size 8,1 --pad 0,0 --pool 5 --sub_agent ${sub_agent} --n_actions 9 --analogy_bs 40 --backend minecraft --counting"
+if ! [ -e "${result}/${game}_${save_name}_soft.tmp" ] && ! [ -e "${result}/${game}_${save_name}_soft.t7" ]
+then 
+echo $common $args1 
+OMP_NUM_THREADS=1 th main.lua $common $args1
+fi
+
+if ! [ -e "${result}/${test_nc}_${save_name}_soft.tmp" ] &&  ! [ -e "${result}/${test_nc}_${save_name}_soft.t7" ]
+then 
+echo $args2
+OMP_NUM_THREADS=1 th main.lua $common $args2
+fi
+
+if ! [ -e "${result}/${test_nc}_${save_name}_hard.tmp" ] &&  ! [ -e "${result}/${test_nc}_${save_name}_hard.t7" ]
+then 
+echo $args3
+OMP_NUM_THREADS=1 th main.lua $common $args3
+fi
+
+# source eval $1 $2
